@@ -1,0 +1,29 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+
+
+// Solo Servidor.
+
+const nombre = 'Martin Abel Reyes Rojas';
+const titulo = 'Home Page';
+---
+
+<MainLayout {titulo}>
+	<h1>{nombre}</h1>
+
+	<p>Momento actual: {new Date().toLocaleTimeString()}</p>
+	<p id="tiempo-actual">Momento actual real:</p>
+
+	<footer>Año: 2023</footer>
+
+	<script>
+		const footer = document.querySelector('footer') as HTMLElement;
+		const pTiempoActual = document.getElementById('tiempo-actual') as HTMLElement;
+		
+		const anioActual: number = new Date().getFullYear();
+
+		footer.innerHTML = `Año: ${anioActual}`;
+		pTiempoActual.innerHTML = `Momento actual real: ${new Date().toLocaleTimeString()}`;
+	</script>
+</MainLayout>
+
