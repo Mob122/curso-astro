@@ -1,0 +1,36 @@
+---
+import { type PokemonResponse, type Result,  } from '../../interfaces/pokemon-list.response'
+
+interface Props {
+    pokemon: Result;
+    isBig?: boolean;
+}
+
+const { pokemon, isBig = false } = Astro.props;
+
+const id = pokemon.url.split('/').at(-2);
+---
+
+<!-- `article relative rounded-xl transition-all ${!isBig && 'bg-blue-800'}` -->
+ <!-- <a href={`/pokemons/${pokemon.name}`} class:list={ -->
+<a href={`/pokemon/${id}`} class:list={
+    [
+        'article relative rounded-xl transition-all',
+        !isBig && 'bg-blue-800'
+    ]
+}>
+    <figure class:list={["mx-auto", isBig ? 'h-26 w-26': 'h-16 w-16']}>        
+        <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`} alt={pokemon.name} transition:name={`${pokemon.name}-image`}>
+    </figure>
+
+    <h2 class:list={[
+        "font-bold text-center", isBig ? 'text-4xl text-blue-300' : 'text-white'
+        
+    ]}>{pokemon.name}</h2>
+</a>
+
+<style>
+    .article:hover {        
+        transform: perspective(500px) rotateX(40deg) scale(.8);
+    }
+</style>

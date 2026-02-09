@@ -1,0 +1,44 @@
+---
+import type { GetStaticPaths } from "astro";
+
+import MainLayout from "../../layouts/MainLayout.astro";
+
+// Path relativo.
+// import PokemonCard from "../../components/pokemons/PokemonCard.astro";
+
+// Path absoluto.
+// import PokemonCard from "src/components/pokemons/PokemonCard.astro";
+
+// Path alias.
+import PokemonCard from "@components/pokemons/PokemonCard.astro";
+
+import type { PokemonListResponse } from "../../interfaces/pokemon-list.response";
+
+export const getStaticPaths = (async () => {
+    const respuesta = await fetch('https://pokeapi.co/api/v2/pokemon?limit=151')
+    const { results } = await respuesta.json() as PokemonListResponse;    
+
+    return results.map((pokemon) => (        
+        { params: { id: pokemon.url.split('/').at(-2)}, props: { id: pokemon.url.split('/').at(-2), name: pokemon.name, url: pokemon.url}}        
+    ))    
+}) satisfies GetStaticPaths;
+
+const { id, name, url } = Astro.props;
+
+const audioSrc = `https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/${id}.ogg`
+---
+
+<MainLayout titulo={name}>    
+    <section class="flex flex-col items-center">
+        <div>
+            <a class="text-blue-800" href="/">Regresar</a>
+            <h1 class="text-5xl">{name}</h1>
+        </div>
+
+        <audio controls class="mt-5">
+            <source src={audioSrc} type="audio/ogg">
+        </audio>
+
+        <PokemonCard pokemon={{name: name, url: url}} isBig />
+    </section>
+</MainLayout>

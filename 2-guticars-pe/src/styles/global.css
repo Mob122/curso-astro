@@ -1,0 +1,9 @@
+@import "tailwindcss";
+
+.btn {
+    @apply bg-blue-500 p-2 rounded-md text-white;
+	}
+
+.disabled {
+    @apply bg-gray-600 text-gray-400;
+}
