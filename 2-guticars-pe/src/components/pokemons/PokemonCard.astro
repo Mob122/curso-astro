@@ -13,7 +13,7 @@ const id = pokemon.url.split('/').at(-2);
 
 <!-- `article relative rounded-xl transition-all ${!isBig && 'bg-blue-800'}` -->
  <!-- <a href={`/pokemons/${pokemon.name}`} class:list={ -->
-<a href={`/pokemon/${id}`} class:list={
+<a href={`/pokemons/${pokemon.name}`} class:list={
     [
         'article relative rounded-xl transition-all',
         !isBig && 'bg-blue-800'
@@ -24,8 +24,7 @@ const id = pokemon.url.split('/').at(-2);
     </figure>
 
     <h2 class:list={[
-        "font-bold text-center", isBig ? 'text-4xl text-blue-300' : 'text-white'
-        
+        "font-bold text-center", isBig ? 'text-4xl text-blue-300' : 'text-white'        
     ]}>{pokemon.name}</h2>
 </a>
 

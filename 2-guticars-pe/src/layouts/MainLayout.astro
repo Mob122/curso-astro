@@ -2,6 +2,7 @@
 import { ClientRouter } from 'astro:transitions';
 import '../styles/global.css';
 import { siteInfo } from 'src/const/sit-info';
+import NavBar from '@components/shared/NavBar.astro';
 
 interface Props {
     titulo: string;
@@ -10,7 +11,6 @@ interface Props {
 }
 
 const { titulo = siteInfo.titulo, descripcion = siteInfo.descripcion, image } = Astro.props;
-
 ---
 
 <html lang="es">
@@ -31,15 +31,17 @@ const { titulo = siteInfo.titulo, descripcion = siteInfo.descripcion, image } = 
 
 		<title>{titulo}</title>
 		
-		<!-- <ClientRouter /> -->
+		<ClientRouter />
 
-		<style>
+		<!-- <style>
 			@view-transition {
-				navigation: auto;	q
+				navigation: auto;
 			}
-		</style>
+		</style> -->
 	</head>
 	<body>
+		<NavBar />
+
 		<main class="px-2">
 			<slot />
 		</main>

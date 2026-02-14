@@ -1,0 +1,14 @@
+---
+import Counter from "@components/Counter.svelte";
+import FavoritePokemons from "@components/pokemons/FavoritePokemons.svelte";
+import MainLayout from "src/layouts/MainLayout.astro";
+
+
+---
+
+<MainLayout titulo="Favorites">
+    <h1 class="font-bold text-2xl">Favoritos</h1>
+
+
+    <FavoritePokemons client:only="svelte"/>
+</MainLayout>

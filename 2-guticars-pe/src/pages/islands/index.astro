@@ -1,0 +1,25 @@
+---
+import Counter from "@components/Counter.svelte";
+import NavBar from "@components/shared/NavBar.astro";
+import MainLayout from "src/layouts/MainLayout.astro";
+
+const counterValue = 20;
+---
+
+<MainLayout titulo="Favorites">
+    <h1>Islas</h1>
+
+    <div style={{
+        height: '2000px',
+        backgroundColor: 'red',
+        opacity: 0.4
+    }}>
+
+    </div>
+
+    <!-- <Counter client:only="svelte" /> -->
+    <Counter transition:persist-props transition:persist="counter" initValue={counterValue} client:visible>
+        <!-- <NavBar /> -->
+         <h1>hola</h1>
+    </Counter>
+</MainLayout>
