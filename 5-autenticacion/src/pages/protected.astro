@@ -1,0 +1,62 @@
+---
+import MainLayout from "@layouts/MainLayout.astro";
+// import { firebase } from "src/firebase/config";
+
+// const firebaseUser = firebase.auth.currentUser;
+
+// console.log(firebaseUser);
+// await firebaseUser?.reload();
+// const { displayName, email, emailVerified, photoURL } = firebaseUser;
+
+const { isLoggedIn, user } = Astro.locals;
+
+if (!isLoggedIn || !user) {
+    return Astro.redirect('/login');
+}
+
+const { name, email, emailVerified, avatar } = user;
+
+export const prerender = false;
+---
+
+<MainLayout>
+    <!-- component -->
+    <div class="bg-gray-200 font-sans h-125 w-full flex flex-row justify-center items-center rounded-2xl">
+    <div class="card w-96 mx-auto bg-white  shadow-xl hover:shadow rounded">
+        {
+            avatar ? (
+                <img class="w-32 mx-auto rounded-full -mt-20 border-8 border-white" src={avatar} alt= {`${name}'s profile picture`} />
+            ) :
+            <div class="w-32 h-32 mx-auto rounded-full -mt-20 border-8 border-white bg-gray-300 flex justify-center items-center">
+                <span class="text-white text-3xl font-extrabold">
+                </span>
+            </div>
+        }
+
+        <div class="text-center mt-2 text-3xl font-medium">{ name || 'No Name' }</div>
+        <div class="text-center mt-2 font-light text-sm">{ email }</div>
+        <div class="text-center font-normal text-lg">
+            {
+                emailVerified ? 'Email Verified' : 'Email Not Verified'
+            }
+        </div>
+        <div class="px-6 text-center mt-2 font-light text-sm">
+        <p>
+            Front end Developer, avid reader. Love to take a long walk, swim
+        </p>
+        </div>
+        <hr class="mt-8">
+        <div class="flex p-4">
+        <div class="w-1/2 text-center">
+            <span class="font-bold">1.8 k</span> Followers
+        </div>
+        <div class="w-0 border border-gray-300">
+            
+        </div>
+        <div class="w-1/2 text-center">
+            <span class="font-bold">2.0 k</span> Following
+        </div>
+        </div>
+    </div>
+    </div>
+</MainLayout> 
